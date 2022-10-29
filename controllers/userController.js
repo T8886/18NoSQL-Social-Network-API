@@ -20,12 +20,12 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //create a user
+  //create a new user
   createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         return res.status(500).json(err);
       });
   },
@@ -49,7 +49,7 @@ module.exports = {
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: "No User find with this ID!" })
+          ? res.status(404).json({ message: "User with this ID is not found!" })
           : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
       .then(() => res.json({ message: "User and Thought deleted!" }))
@@ -64,7 +64,7 @@ module.exports = {
     )
       .then((user) =>
         !user
-          ? res.status(404).json({ message: "No User find with this ID!" })
+          ? res.status(404).json({ message: "User with this ID is not found!!" })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
@@ -79,7 +79,7 @@ module.exports = {
       .then(
         (user) =>
           !user
-            ? res.status(404).json({ message: "No User find with this ID!" })
+            ? res.status(404).json({ message: "User with this ID is not found!!" })
             : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
