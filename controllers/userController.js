@@ -1,6 +1,6 @@
 const { User, Thought } = require("../models");
 
-module.exports = {
+const userController = {
   //Get all users
   getUser(req, res) {
     User.find({})
@@ -76,12 +76,14 @@ module.exports = {
       { $pull: { friends: req.params.friendId } },
       { new: true }
     )
-      .then(
-        (user) =>
+      .then((user) =>
           !user
-            ? res.status(404).json({ message: "User with this ID is not found!!" })
+            ? res
+            .status(404)
+            .json({ message: "User with this ID is not found!!" })
             : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
 };
+module.exports = userController;
