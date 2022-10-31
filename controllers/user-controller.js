@@ -1,3 +1,5 @@
+// Code was created with the assistance of tutor
+
 const { User, Thought } = require("../models");
 
 const userController = {
